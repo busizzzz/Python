@@ -4,42 +4,51 @@ import argparse
 parser = argparse.ArgumentParser(description="wc.exe")            
 parser.add_argument("-c", "--chars",
                      dest="chars",
-                     action="store_true",
                      help="count chars")  
 parser.add_argument("-w", "--words",
                      dest="words",
-                     action="store_true",
                      help="count words") 
 parser.add_argument("-l", "--lines",
                      dest="lines",
-                     action="store_true",
                      help="count lines")                                                                                    
 args = parser.parse_args()   
 
-def get_Count(data):
+def get_Count(data):#
     chars = len(data)
     words = len(data.split())
     lines = data.count('\n')
     return lines, words, chars
 
 def count_chars(args):
-    c=0
-    with open(args.chars,'r')as f:
+    chars=0
+    with open(args,'r')as f:
+        data = f.read()
         for line in f:
-            c=get_Count(args)
-    return c    
+            chars=get_Count(args)
+    return chars    
         
 def count_lines(args):
-    l=0
-    with open(args.lines,'r')as f:
+    lines=0
+    with open(args,'r')as f:
+        data = f.read()
         for line in f:
-            l=get_Count(args)       
-    return l 
+            lines=get_Count(args)       
+    return lines 
 
-def count_word(args):
-    w=0
-    with open(args.lines,'r')as f:
+def count_words(args):
+    words=0
+    with open(args,'r')as f:
+        data = f.read()
         for line in f:
-            w=get_Count(args)       
-    return w 
+            words=get_Count(args)       
+    return words 
 
+if args.chars:  
+	l=count_chars(args.chars)
+	print('字符数：',l)
+if args.words:   
+	w=count_lines(args.words)
+	print('词数：',w)
+if args.lines:   
+	c=count_words(args.lines)
+	print('行数：',c)
