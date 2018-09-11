@@ -13,42 +13,44 @@ parser.add_argument("-l", "--lines",
                      help="count lines")                                                                                    
 args = parser.parse_args()   
 
-def get_Count(data):#
+def get_Count(data):
     chars = len(data)
     words = len(data.split())
     lines = data.count('\n')
-    return lines, words, chars
+    if args.chars:
+        return chars
+    if args.words:
+        return words
+    if args.lines:
+         return lines
 
 def count_chars(args):
     chars=0
     with open(args,'r')as f:
         data = f.read()
-        for line in f:
-            chars=get_Count(args)
+        chars=get_Count(data)
     return chars    
         
 def count_lines(args):
     lines=0
     with open(args,'r')as f:
         data = f.read()
-        for line in f:
-            lines=get_Count(args)       
+        lines=get_Count(data)       
     return lines 
 
 def count_words(args):
     words=0
     with open(args,'r')as f:
         data = f.read()
-        for line in f:
-            words=get_Count(args)       
+        words=get_Count(data)       
     return words 
 
 if args.chars:  
-	l=count_chars(args.chars)
-	print('字符数：',l)
+	c=count_chars(args.chars)
+	print('文本的字符数：',c)
 if args.words:   
-	w=count_lines(args.words)
-	print('词数：',w)
+	w=count_words(args.words)
+	print('文本的词数：',w)
 if args.lines:   
-	c=count_words(args.lines)
-	print('行数：',c)
+	l=count_lines(args.lines)
+	print('文本的行数：',l)
