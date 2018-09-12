@@ -13,28 +13,28 @@ parser.add_argument("-l",
                      help="count lines")                                                                                    
 args = parser.parse_args() 
 
-i=0
-def get_Count(args):
+i=0#全局变量，用于判断该返回哪个数
+def get_Count(args):#用于计算出字符数、单词数和行数
     global i
     if i==1:
         chars=0
         with open(args,'r')as f:
             data = f.read()
             chars = len(data)
-        return chars
+        return chars#返回字符数
     if i==2:
         words=0
         with open(args,'r')as f:
             data = f.read()
             words = len(data.split())
-        return words
+        return words#返回单词数
     if i==3:
         lines=0
         with open(args,'r')as f:
             for Lines in f:
                 lines+=1
-        return lines
-def main():
+        return lines#返回行数
+def main():#用于调用get_Count函数和输出结果
     global i
     if args.Chars:
         i=1
