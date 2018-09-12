@@ -2,55 +2,51 @@
 #argparse模块，用于处理命令行参数
 import argparse
 parser = argparse.ArgumentParser(description="wc.exe")            
-parser.add_argument("-c", "--chars",
-                     dest="chars",
+parser.add_argument("-c", 
+                     dest="Chars",
                      help="count chars")  
-parser.add_argument("-w", "--words",
-                     dest="words",
+parser.add_argument("-w", 
+                     dest="Words",
                      help="count words") 
-parser.add_argument("-l", "--lines",
-                     dest="lines",
+parser.add_argument("-l", 
+                     dest="Lines",
                      help="count lines")                                                                                    
-args = parser.parse_args()   
+args = parser.parse_args() 
 
-def get_Count(data):
-    chars = len(data)
-    words = len(data.split())
-    lines = data.count('\n')
-    if args.chars:
+i=0
+def get_Count(args):
+    global i
+    if i==1:
+        chars=0
+        with open(args,'r')as f:
+            data = f.read()
+            chars = len(data)
         return chars
-    if args.words:
+    if i==2:
+        words=0
+        with open(args,'r')as f:
+            data = f.read()
+            words = len(data.split())
         return words
-    if args.lines:
-         return lines
-
-def count_chars(args):
-    chars=0
-    with open(args,'r')as f:
-        data = f.read()
-        chars=get_Count(data)
-    return chars    
-        
-def count_lines(args):
-    lines=0
-    with open(args,'r')as f:
-        data = f.read()
-        lines=get_Count(data)       
-    return lines 
-
-def count_words(args):
-    words=0
-    with open(args,'r')as f:
-        data = f.read()
-        words=get_Count(data)       
-    return words 
-
-if args.chars:  
-	c=count_chars(args.chars)
-	print('文本的字符数：',c)
-if args.words:   
-	w=count_words(args.words)
-	print('文本的词数：',w)
-if args.lines:   
-	l=count_lines(args.lines)
-	print('文本的行数：',l)
+    if i==3:
+        lines=0
+        with open(args,'r')as f:
+            for Lines in f:
+                lines+=1
+        return lines
+def main():
+    global i
+    if args.Chars:
+        i=1
+        c=get_Count(args.Chars)
+        print('文本的字符数：',c)
+    if args.Words:
+        i=2
+        w=get_Count(args.Words)
+        print('文本的词数：',w)
+    if args.Lines:
+        i=3
+        l=get_Count(args.Lines)
+        print('文本的行数：',l)
+if __name__ == '__main__':
+    main()
