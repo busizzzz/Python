@@ -1,4 +1,4 @@
-# Python
+# WordCount
 基本功能列表：
 1.wordCounter.exe -c file.c //返回文件 file.c 的字符数
 2.wordCounter.exe -w file.c //返回文件 file.c 的词的数目
